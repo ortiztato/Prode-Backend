@@ -14,7 +14,7 @@ const mySchema = new Schema({
     Semis: [String],
     Final: [String],
     Goleadores: [String],
-    Partidos: [Number],
+    Partidos: [[Number]],
 
 
 });
