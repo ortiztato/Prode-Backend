@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-/* const cors = require('cors') */
+const cors = require('cors')
 
 const db = require('./db');
 
@@ -8,7 +8,7 @@ const router = require('./network/routes');
 
 db('mongodb+srv://ortiztato:antorchaz@clusterprode.lzicw5t.mongodb.net/?retryWrites=true&w=majority');
 
-/* app.use(cors()) */
+app.use(cors())
 
 var app = express();
 app.use(bodyParser.json());
