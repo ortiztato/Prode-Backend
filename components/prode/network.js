@@ -37,7 +37,7 @@ router.get('/', function (req, res) {
 });
 
 router.patch('/', function (req, res) {
-    controller.updateMessage(req.body.id, req.body.Liga)
+    controller.updateMessage(req.body.id, req.body.Partidos)
         .then((data) => {
             response.success(req, res, data, 200);
         })

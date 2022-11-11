@@ -33,16 +33,16 @@ function listUsers() {
     return store.list();
 }
 
-function updateMessage(id, Liga) {
+function updateMessage(id, Partidos) {
     return new Promise(async (resolve, reject) => {
         console.log(id);
-        console.log(Liga);
-        if (!id || !Liga) {
+        console.log(Partidos);
+        if (!id || !Partidos) {
             reject('Invalid data');
             return false;
         }
 
-        const result = await store.updateLiga(id, Liga);
+        const result = await store.updateLiga(id, Partidos);
 
         resolve(result);
     })
