@@ -1,6 +1,30 @@
 const store = require('./store');
 
-function addProde(Nombre, Liga, Ganador, Desilusion, Lamentable, Revelacion, Octavos, Cuartos, Semis, Final, Goleadores, Partidos) {
+function addProde(
+    Nombre,
+    Liga,
+    Ganador,
+    Desilusion,
+    Lamentable,
+    Revelacion,
+    Octavos,
+    Cuartos,
+    Semis,
+    Final,
+    Goleadores,
+    Partidos,
+    GanadorPtos,
+    DesilusionPtos,
+    LamentablePtos,
+    RevelacionPtos,
+    OctavosPtos,
+    CuartosPtos,
+    SemisPtos,
+    FinalPtos,
+    GoleadoresPtos,
+    PartidosPtos,
+    TotalPtos
+) {
     return new Promise((resolve, reject) => {
         if (!Nombre || !Liga) {
             console.error('[messageController] algún dato esta incorrecto');
@@ -20,7 +44,18 @@ function addProde(Nombre, Liga, Ganador, Desilusion, Lamentable, Revelacion, Oct
             Semis: Semis,
             Final: Final,
             Goleadores: Goleadores,
-            Partidos: Partidos
+            Partidos: Partidos,
+            GanadorPtos: GanadorPtos,
+            DesilusionPtos: DesilusionPtos,
+            LamentablePtos: LamentablePtos,
+            RevelacionPtos: RevelacionPtos,
+            OctavosPtos: OctavosPtos,
+            CuartosPtos: CuartosPtos,
+            SemisPtos: SemisPtos,
+            FinalPtos: FinalPtos,
+            GoleadoresPtos: GoleadoresPtos,
+            PartidosPtos: PartidosPtos,
+            TotalPtos: TotalPtos
         };
         /* return store.add(prode); */
         store.add(prode);

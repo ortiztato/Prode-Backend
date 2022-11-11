@@ -16,7 +16,20 @@ router.post('/', function (req, res) {
         req.body.Semis,
         req.body.Final,
         req.body.Goleadores,
-        req.body.Partidos
+        req.body.Partidos,
+        req.body.GanadorPtos,
+        req.body.DesilusionPtos,
+        req.body.LamentablePtos,
+        req.body.RevelacionPtos,
+        req.body.OctavosPtos,
+        req.body.CuartosPtos,
+        req.body.SemisPtos,
+        req.body.FinalPtos,
+        req.body.GoleadoresPtos,
+        req.body.PartidosPtos,
+        req.body.TotalPtos
+
+
     )
         .then((fullMessage) => {
             response.success(req, res, fullMessage, 201);
