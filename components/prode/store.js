@@ -10,12 +10,12 @@ function listUsers() {
     return Model.find();
 }
 
-async function updateLiga(id, Partidos) {
+async function updateLiga(id, Liga) {
     const foundMessage = await Model.findOne({
         _id: id
     });
 
-    foundMessage.Partidos = Partidos;
+    foundMessage.Liga = Liga;
 
     const newMessage = await foundMessage.save();
     return newMessage;
