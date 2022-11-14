@@ -68,6 +68,10 @@ function listUsers() {
     return store.list();
 }
 
+function listUsersNames() {
+    return store.listNames();
+}
+
 function updateMessage(id, Liga) {
     return new Promise(async (resolve, reject) => {
         console.log(id);
@@ -86,5 +90,6 @@ function updateMessage(id, Liga) {
 module.exports = {
     addProde,
     listUsers,
-    updateMessage
+    updateMessage,
+    listUsersNames
 }

@@ -59,4 +59,17 @@ router.patch('/', function (req, res) {
         });
 });
 
+router.get('/names', function (req, res) {
+    controller.listUsersNames()
+        .then(data => {
+            response.success(req, res, data, 200);
+            console.log(data)
+        })
+        .catch(err => {
+            response.error(req, res, 'Internal error', 500, err);
+        });
+
+});
+
+
 module.exports = router;

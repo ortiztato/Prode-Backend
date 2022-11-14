@@ -10,6 +10,11 @@ function listUsers() {
     return Model.find();
 }
 
+function listUsersNames() {
+    let Nombres = Model.find({}, 'Nombre')
+    return Nombres;
+}
+
 async function updateLiga(id, Liga) {
     const foundMessage = await Model.findOne({
         _id: id
@@ -25,4 +30,5 @@ module.exports = {
     add: addProde,
     list: listUsers,
     updateLiga: updateLiga,
+    listNames: listUsersNames
 }
