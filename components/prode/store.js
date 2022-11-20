@@ -7,7 +7,8 @@ function addProde(prode) {
 }
 
 function listUsers() {
-    return Model.find();
+    return Model.find().sort({ TotalPtos: -1 });
+
 }
 
 function listUsersNames() {
