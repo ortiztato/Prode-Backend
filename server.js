@@ -28,6 +28,6 @@ app.use('/app', express.static('public'));
 
 
 app.listen(8080);
-// app.listen(3000);
+// app.listen(3000); para correr en local
 console.log('La aplicación está escuchando en http://localhost:3000');
 
