@@ -72,10 +72,8 @@ function listUsersNames() {
     return store.listNames();
 }
 
-function updateMessage(id, Liga) {
+function updateLiga(id, Liga) {
     return new Promise(async (resolve, reject) => {
-        console.log(id);
-        console.log(Liga);
         if (!id || !Liga) {
             reject('Invalid data');
             return false;
@@ -87,9 +85,17 @@ function updateMessage(id, Liga) {
     })
 }
 
+function updateScores() {
+    store.list()
+        .then(data => {
+            return store.requestUpdate(data)
+        })
+}
+
 module.exports = {
     addProde,
     listUsers,
-    updateMessage,
-    listUsersNames
+    updateLiga,
+    listUsersNames,
+    updateScores
 }

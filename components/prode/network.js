@@ -50,7 +50,7 @@ router.get('/', function (req, res) {
 });
 
 router.patch('/', function (req, res) {
-    controller.updateMessage(req.body.id, req.body.Liga)
+    controller.updateLiga(req.body.id, req.body.Liga)
         .then((data) => {
             response.success(req, res, data, 200);
         })
@@ -72,6 +72,23 @@ router.get('/names', function (req, res) {
             response.error(req, res, 'Internal error', 500, err);
         });
 
+});
+
+router.patch('/update', function () {
+    console.log('recibido el request del update')
+
+    controller.updateScores()
+    .then(data => {
+        response.success(req, res, data, 200);
+    })
+    .catch(err => {
+        response.error(req, res, 'Internal error', 500, err);
+    });
+
+    // storePruebas.list() // asi estaba en la otra version sin respuesta a la peticion
+    //     .then(data => {
+    //         storePruebas.requestUpdate(data)
+    //     })
 });
 
 
