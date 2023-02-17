@@ -1,5 +1,5 @@
 const Model = require('./model');
-const scoresData = require('../scores/data');
+const scoresData = require('../../scoresData/scoresData')
 
 function add(prode) {
     const myUser = new Model(prode);
@@ -56,8 +56,7 @@ async function updateUserPuntos(
     prodeUpdated.SemisPtos = puntajeSemis
     prodeUpdated.FinalPtos = puntajeFinal
     prodeUpdated.TotalPtos = puntajeTotal
-    const newProde = await prodeUpdated.save();
-    return newProde
+    await prodeUpdated.save();
 }
 
 
@@ -92,6 +91,7 @@ const requestUpdate = (data) => {
 
         let puntajeTotal = puntajeGanador + puntajeRevelacion + puntajeLamentable + puntajeGoleador + puntajePartidos + puntajeDesilusion + puntajeOctavos + puntajeCuartos + puntajeSemis + puntajeFinal
         updateUserPuntos(id, puntajeGanador, puntajeRevelacion, puntajeDesilusion, puntajeLamentable, puntajePartidos, puntajeGoleador, puntajeOctavos, puntajeCuartos, puntajeSemis, puntajeFinal, puntajeTotal)
+        
 
     })
 }

@@ -86,10 +86,13 @@ function updateLiga(id, Liga) {
 }
 
 function updateScores() {
-    store.list()
+    // return store.listNames();
+    const list = store.list()
         .then(data => {
-            return store.requestUpdate(data)
+            store.requestUpdate(data)
         })
+        return list
+                  
 }
 
 module.exports = {
