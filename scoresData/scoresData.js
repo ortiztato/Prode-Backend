@@ -66,7 +66,7 @@ const Goleador = {
     Neymar: 2,
     Kane: 2,
     'Lautaro M': 0,
-    Mbappe: 8,
+    Mbappe: 20, //8
     Benzema: 0,
     Ronaldo: 1,
     Lukaku: 0,
