@@ -1,4 +1,5 @@
-require("dotenv").config();
+const dotenv = require("dotenv");
+const result = dotenv.config();
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -8,11 +9,11 @@ const db = require("./db");
 
 const router = require("./network/routes");
 
-// db(process.env.DATABASE_URL); 'mongodb+srv://ortiztato:antorchaz@clusterprode.lzicw5t.mongodb.net/?retryWrites=true&w=majority'
+db(process.env.DATABASE_URL);
 
-db(
-  "mongodb+srv://ortiztato:antorchaz@clusterprode.lzicw5t.mongodb.net/?retryWrites=true&w=majority"
-);
+// db(
+//   "mongodb+srv://ortiztato:antorchaz@clusterprode.lzicw5t.mongodb.net/?retryWrites=true&w=majority"
+// );
 
 var app = express();
 
