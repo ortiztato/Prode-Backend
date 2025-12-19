@@ -97,21 +97,21 @@ const requestUpdate = (data) => {
 }
 
 async function checkLeague(leagueName) {
-	const league = await Model.findOne({
-		Liga: leagueName,
-	});
-
-	if (league) {
-		return true;
-	}
-	return false;
+    const league = await Model.findOne({
+        Liga: leagueName
+    });
+    
+    if (league) {
+        return true;
+    }
+    return false;
 }
 
 module.exports = {
-	add,
-	list,
-	updateLiga,
-	listNames,
-	requestUpdate,
-	checkLeague,
+    add,
+    list,
+    updateLiga,
+    listNames,
+    requestUpdate,
+    checkLeague
 };
