@@ -97,13 +97,30 @@ const requestUpdate = (data) => {
 }
 
 async function checkLeague(leagueName) {
-    const league = await Model.findOne({
-        Liga: leagueName
-    });
-    
-    if (league) {
-        return true;
-    }
+    console.log("🔍 [checkLeague] Buscando liga:", leagueName);
+		console.log("🔍 [checkLeague] Tipo de dato:", typeof leagueName);
+		console.log("🔍 [checkLeague] Longitud:", leagueName?.length);
+
+		// Buscar todas las ligas para comparar
+		const allUsers = await Model.find({});
+		const allLeagues = [
+			...new Set(allUsers.map((user) => user.Liga).filter(Boolean)),
+		];
+		console.log("📋 [checkLeague] Todas las ligas en BD:", allLeagues);
+		console.log("📋 [checkLeague] Total de ligas únicas:", allLeagues.length);
+
+		const league = await Model.findOne({
+			Liga: leagueName,
+		});
+
+		console.log("📊 [checkLeague] Resultado de la query:", league);
+		console.log("📊 [checkLeague] Existe?:", !!league);
+
+		if (league) {
+			console.log("✅ [checkLeague] Liga encontrada, retornando true");
+			return true;
+		}
+		console.log("❌ [checkLeague] Liga NO encontrada, retornando false");
     return false;
 }
 
