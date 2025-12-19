@@ -91,5 +91,16 @@ router.patch('/update', function (req, res) {
         //     })
 });
 
+router.get("/liga/:id", function (req, res) {
+	controller
+		.checkLeague(req.params.id)
+		.then((exists) => {
+			response.success(req, res, { exists: exists }, 200);
+		})
+		.catch((err) => {
+			response.error(req, res, "Internal error", 500, err);
+		});
+});
+
 
 module.exports = router;

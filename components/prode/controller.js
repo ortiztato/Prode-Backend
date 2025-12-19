@@ -95,10 +95,29 @@ function updateScores() {
                   
 }
 
-module.exports = {
-    addProde,
-    listUsers,
-    updateLiga,
-    listUsersNames,
-    updateScores
+function checkLeague(leagueName) {
+	return new Promise((resolve, reject) => {
+		if (!leagueName) {
+			reject("Invalid league name");
+			return false;
+		}
+
+		store
+			.checkLeague(leagueName)
+			.then((exists) => {
+				resolve(exists);
+			})
+			.catch((e) => {
+				reject(e);
+			});
+	});
 }
+
+module.exports = {
+	addProde,
+	listUsers,
+	updateLiga,
+	listUsersNames,
+	updateScores,
+	checkLeague,
+};
