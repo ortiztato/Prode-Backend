@@ -63,10 +63,6 @@ router.get('/names', function (req, res) {
     controller.listUsersNames()
         .then(data => {
             response.success(req, res, data, 200);
-            // console.log(data)
-            /* let nameArr = []
-            data.map((key) => nameArr.push(key.Nombre))
-            console.log('Hola ' + nameArr[4]) */
         })
         .catch(err => {
             response.error(req, res, 'Internal error', 500, err);
@@ -85,10 +81,6 @@ router.patch('/update', function (req, res) {
             response.error(req, res, 'Internal error', 500, err);
         });
 
-        // storePruebas.list() // asi estaba en la otra version sin respuesta a la peticion
-        //     .then(data => {
-        //         storePruebas.requestUpdate(data)
-        //     })
 });
 
 router.get("/leagues/:id", function (req, res) {
