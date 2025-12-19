@@ -91,7 +91,7 @@ router.patch('/update', function (req, res) {
         //     })
 });
 
-router.get("/liga/:id", function (req, res) {
+router.get("/leagues/:id", function (req, res) {
 	controller
 		.checkLeague(req.params.id)
 		.then((exists) => {
