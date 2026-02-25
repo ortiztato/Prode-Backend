@@ -1,104 +1,157 @@
-const Model = require('./model');
-const scoresData = require('../../scoresData/scoresData')
+const Model = require("./model");
+const LeagueModel = require("./leagueModel");
+const scoresData = require("../../scoresData/scoresData");
 
 function add(prode) {
-    const myUser = new Model(prode);
-    return myUser.save();
+	const myUser = new Model(prode);
+	return myUser.save();
 }
 
-function list() {
-    return Model.find().sort({ TotalPtos: -1 });
-
+function list(filter) {
+	let query = {};
+	if (filter) {
+		query = { Liga: filter };
+	}
+	return Model.find(query).sort({ TotalPtos: -1 });
 }
 
 function listNames() {
-    let Nombres = Model.find({}, 'Nombre')
-    return Nombres;
+	let Nombres = Model.find({}, "Nombre");
+	return Nombres;
 }
 
 async function updateLiga(id, Liga) {
-    const foundUser = await Model.findOne({
-        _id: id
-    });
+	const foundUser = await Model.findOne({
+		_id: id,
+	});
 
-    foundUser.Liga = Liga;
+	foundUser.Liga = Liga;
 
-    const updatedUser = await foundUser.save();
-    return updatedUser;
+	const updatedUser = await foundUser.save();
+	return updatedUser;
 }
 
 async function updateUserPuntos(
-    id,
-    puntajeGanador,
-    puntajeRevelacion,
-    puntajeDesilusion,
-    puntajeLamentable,
-    puntajePartidos,
-    puntajeGoleador,
-    puntajeOctavos,
-    puntajeCuartos,
-    puntajeSemis,
-    puntajeFinal,
-    puntajeTotal
+	id,
+	puntajeGanador,
+	puntajeRevelacion,
+	puntajeDesilusion,
+	puntajeLamentable,
+	puntajePartidos,
+	puntajeGoleador,
+	puntajeOctavos,
+	puntajeCuartos,
+	puntajeSemis,
+	puntajeFinal,
+	puntajeTotal,
 ) {
-    const prodeUpdated = await Model.findOne({
-        _id: id
-    });
+	const prodeUpdated = await Model.findOne({
+		_id: id,
+	});
 
-    prodeUpdated.GanadorPtos = puntajeGanador;
-    prodeUpdated.RevelacionPtos = puntajeRevelacion;
-    prodeUpdated.DesilusionPtos = puntajeDesilusion
-    prodeUpdated.LamentablePtos = puntajeLamentable
-    prodeUpdated.PartidosPtos = puntajePartidos
-    prodeUpdated.GoleadoresPtos = puntajeGoleador
-    prodeUpdated.OctavosPtos = puntajeOctavos
-    prodeUpdated.CuartosPtos = puntajeCuartos
-    prodeUpdated.SemisPtos = puntajeSemis
-    prodeUpdated.FinalPtos = puntajeFinal
-    prodeUpdated.TotalPtos = puntajeTotal
-    await prodeUpdated.save();
+	prodeUpdated.GanadorPtos = puntajeGanador;
+	prodeUpdated.RevelacionPtos = puntajeRevelacion;
+	prodeUpdated.DesilusionPtos = puntajeDesilusion;
+	prodeUpdated.LamentablePtos = puntajeLamentable;
+	prodeUpdated.PartidosPtos = puntajePartidos;
+	prodeUpdated.GoleadoresPtos = puntajeGoleador;
+	prodeUpdated.OctavosPtos = puntajeOctavos;
+	prodeUpdated.CuartosPtos = puntajeCuartos;
+	prodeUpdated.SemisPtos = puntajeSemis;
+	prodeUpdated.FinalPtos = puntajeFinal;
+	prodeUpdated.TotalPtos = puntajeTotal;
+	await prodeUpdated.save();
 }
 
-
-
 const requestUpdate = (data) => {
-    let prodes = []
-    prodes = data
-    prodes.map((key) => {
-        let id = key.id
-        let puntajeGanador = scoresData.Ganador[key.Ganador]
-        let puntajeRevelacion = scoresData.Revelacion[key.Revelacion]
-        let puntajeDesilusion = scoresData.Desilusion[key.Desilusion]
-        let puntajeLamentable = scoresData.Lamentable[key.Lamentable]
-        let puntajeGoleador1 = scoresData.Goleador[key.Goleadores[0]] || 0
-        let puntajeGoleador2 = scoresData.Goleador[key.Goleadores[1]] || 0
-        let puntajeGoleador3 = scoresData.Goleador[key.Goleadores[2]] || 0
-        let puntajeGoleador = puntajeGoleador1 + puntajeGoleador2 + puntajeGoleador3
-        let arrPartidos = []
-        key.Partidos.map((eleccion) => { (eleccion.map((partido) => arrPartidos.push(partido))) })
-        const filteredArray = arrPartidos.filter(value => scoresData.Partidos.includes(value));
-        let puntajePartidos = (filteredArray.length) * 2
+	let prodes = [];
+	prodes = data;
+	prodes.map((key) => {
+		let id = key.id;
+		let puntajeGanador = scoresData.Ganador[key.Ganador];
+		let puntajeRevelacion = scoresData.Revelacion[key.Revelacion];
+		let puntajeDesilusion = scoresData.Desilusion[key.Desilusion];
+		let puntajeLamentable = scoresData.Lamentable[key.Lamentable];
+		let puntajeGoleador1 = scoresData.Goleador[key.Goleadores[0]] || 0;
+		let puntajeGoleador2 = scoresData.Goleador[key.Goleadores[1]] || 0;
+		let puntajeGoleador3 = scoresData.Goleador[key.Goleadores[2]] || 0;
+		let puntajeGoleador =
+			puntajeGoleador1 + puntajeGoleador2 + puntajeGoleador3;
+		let arrPartidos = [];
+		key.Partidos.map((eleccion) => {
+			eleccion.map((partido) => arrPartidos.push(partido));
+		});
+		const filteredArray = arrPartidos.filter((value) =>
+			scoresData.Partidos.includes(value),
+		);
+		let puntajePartidos = filteredArray.length * 2;
 
-        const filteredArrayOctavos = key.Octavos.filter(value => scoresData.Octavos.includes(value));
-        let puntajeOctavos = (filteredArrayOctavos.length) * 2
-        const filteredArrayCuartos = key.Cuartos.filter(value => scoresData.Cuartos.includes(value));
-        let puntajeCuartos = (filteredArrayCuartos.length) * 3
-        const filteredArraySemis = key.Semis.filter(value => scoresData.Semis.includes(value));
-        let puntajeSemis = (filteredArraySemis.length) * 4
-        const filteredArrayFinal = key.Final.filter(value => scoresData.Final.includes(value));
-        let puntajeFinal = (filteredArrayFinal.length) * 5
+		const filteredArrayOctavos = key.Octavos.filter((value) =>
+			scoresData.Octavos.includes(value),
+		);
+		let puntajeOctavos = filteredArrayOctavos.length * 2;
+		const filteredArrayCuartos = key.Cuartos.filter((value) =>
+			scoresData.Cuartos.includes(value),
+		);
+		let puntajeCuartos = filteredArrayCuartos.length * 3;
+		const filteredArraySemis = key.Semis.filter((value) =>
+			scoresData.Semis.includes(value),
+		);
+		let puntajeSemis = filteredArraySemis.length * 4;
+		const filteredArrayFinal = key.Final.filter((value) =>
+			scoresData.Final.includes(value),
+		);
+		let puntajeFinal = filteredArrayFinal.length * 5;
 
+		let puntajeTotal =
+			puntajeGanador +
+			puntajeRevelacion +
+			puntajeLamentable +
+			puntajeGoleador +
+			puntajePartidos +
+			puntajeDesilusion +
+			puntajeOctavos +
+			puntajeCuartos +
+			puntajeSemis +
+			puntajeFinal;
+		updateUserPuntos(
+			id,
+			puntajeGanador,
+			puntajeRevelacion,
+			puntajeDesilusion,
+			puntajeLamentable,
+			puntajePartidos,
+			puntajeGoleador,
+			puntajeOctavos,
+			puntajeCuartos,
+			puntajeSemis,
+			puntajeFinal,
+			puntajeTotal,
+		);
+	});
+};
 
-        let puntajeTotal = puntajeGanador + puntajeRevelacion + puntajeLamentable + puntajeGoleador + puntajePartidos + puntajeDesilusion + puntajeOctavos + puntajeCuartos + puntajeSemis + puntajeFinal
-        updateUserPuntos(id, puntajeGanador, puntajeRevelacion, puntajeDesilusion, puntajeLamentable, puntajePartidos, puntajeGoleador, puntajeOctavos, puntajeCuartos, puntajeSemis, puntajeFinal, puntajeTotal)
-        
+async function getLeague(leagueName) {
+	return LeagueModel.findOne({ Nombre: leagueName.toLowerCase() });
+}
 
-    })
+async function createLeague(name, pin) {
+	const newLeague = new LeagueModel({
+		Nombre: name.toLowerCase(),
+		PIN: pin,
+	});
+	return newLeague.save();
+}
+
+async function validateLeaguePIN(name, pin) {
+	const league = await LeagueModel.findOne({ Nombre: name.toLowerCase() });
+	if (!league) return false;
+	return league.PIN === pin;
 }
 
 async function checkLeague(leagueName) {
-	const league = await Model.findOne({
-		Liga: leagueName,
+	const league = await LeagueModel.findOne({
+		Nombre: leagueName.toLowerCase(),
 	});
 
 	if (league) {
@@ -108,10 +161,13 @@ async function checkLeague(leagueName) {
 }
 
 module.exports = {
-    add,
-    list,
-    updateLiga,
-    listNames,
-    requestUpdate,
-    checkLeague
+	add,
+	list,
+	updateLiga,
+	listNames,
+	requestUpdate,
+	checkLeague,
+	getLeague,
+	createLeague,
+	validateLeaguePIN,
 };
