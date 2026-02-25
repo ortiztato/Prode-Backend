@@ -20,6 +20,10 @@ function listNames() {
 	return Nombres;
 }
 
+function listLeagues() {
+	return LeagueModel.find({}, "Nombre -_id").sort({ Nombre: 1 });
+}
+
 async function updateLiga(id, Liga) {
 	const foundUser = await Model.findOne({
 		_id: id,
@@ -165,6 +169,7 @@ module.exports = {
 	list,
 	updateLiga,
 	listNames,
+	listLeagues,
 	requestUpdate,
 	checkLeague,
 	getLeague,

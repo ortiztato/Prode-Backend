@@ -85,6 +85,17 @@ router.patch("/update", function (req, res) {
 		});
 });
 
+router.get("/leagues", function (req, res) {
+	controller
+		.listLeagues()
+		.then((data) => {
+			response.success(req, res, data, 200);
+		})
+		.catch((err) => {
+			response.error(req, res, "Internal error", 500, err);
+		});
+});
+
 router.get("/leagues/:id", function (req, res) {
 	controller
 		.checkLeague(req.params.id)

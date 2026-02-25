@@ -88,6 +88,10 @@ function listUsersNames() {
 	return store.listNames();
 }
 
+function listLeagues() {
+	return store.listLeagues();
+}
+
 function updateLiga(id, Liga) {
 	return new Promise(async (resolve, reject) => {
 		if (!id || !Liga) {
@@ -160,6 +164,7 @@ module.exports = {
 	listUsers,
 	updateLiga,
 	listUsersNames,
+	listLeagues,
 	updateScores,
 	checkLeague,
 	validateLeaguePIN,
