@@ -4,9 +4,7 @@ db.Promise = global.Promise;
 
 
 async function connect(url) {
-    await db.connect(url, {
-        useNewUrlParser: true,
-    });
+    await db.connect(url);
     console.log('[db] Conectada con éxito');
 }
 

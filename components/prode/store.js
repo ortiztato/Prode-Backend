@@ -72,10 +72,10 @@ const requestUpdate = (data) => {
 	prodes = data;
 	prodes.map((key) => {
 		let id = key.id;
-		let puntajeGanador = scoresData.Ganador[key.Ganador];
-		let puntajeRevelacion = scoresData.Revelacion[key.Revelacion];
-		let puntajeDesilusion = scoresData.Desilusion[key.Desilusion];
-		let puntajeLamentable = scoresData.Lamentable[key.Lamentable];
+		let puntajeGanador = scoresData.Ganador[key.Ganador] || 0;
+		let puntajeRevelacion = scoresData.Revelacion[key.Revelacion] || 0;
+		let puntajeDesilusion = scoresData.Desilusion[key.Desilusion] || 0;
+		let puntajeLamentable = scoresData.Lamentable[key.Lamentable] || 0;
 		let puntajeGoleador1 = scoresData.Goleador[key.Goleadores[0]] || 0;
 		let puntajeGoleador2 = scoresData.Goleador[key.Goleadores[1]] || 0;
 		let puntajeGoleador3 = scoresData.Goleador[key.Goleadores[2]] || 0;
