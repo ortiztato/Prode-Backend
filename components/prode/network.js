@@ -72,6 +72,10 @@ router.get("/names", function (req, res) {
 		});
 });
 
+// para ejecutar desde la terminal con powershell
+// Invoke-RestMethod -Uri http://localhost:8080/prode/update -Method PATCH
+
+
 router.patch("/update", function (req, res) {
 	console.log("recibido el request del update");
 
